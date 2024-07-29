@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/03/28 16:23:06.000.794,=C:\Users\aggil\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/25 15:12:26.000.648,=C:\Users\aggil\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/25 15:12:57.000.971,C:\Users\aggil\Documents\Embarcadero\Studio\Projects\Unit1.fmx=E:\Aggille\Sistemas\Delphi\Uploader\Aggille.Uploader.Main.fmx</Transaction>
+    <Transaction>2024/07/25 15:12:57.000.971,C:\Users\aggil\Documents\Embarcadero\Studio\Projects\Unit1.pas=E:\Aggille\Sistemas\Delphi\Uploader\Aggille.Uploader.Main.pas</Transaction>
+    <Transaction>2024/07/25 15:13:05.000.039,C:\Users\aggil\Documents\Embarcadero\Studio\Projects\Project1.dproj=E:\Aggille\Sistemas\Delphi\Uploader\Aggille.Uploader.dproj</Transaction>
+    <Transaction>2024/07/26 07:39:34.000.498,=E:\Aggille\Sistemas\Delphi\Uploader\Unit1.pas</Transaction>
+    <Transaction>2024/07/26 07:40:02.000.915,E:\Aggille\Sistemas\Delphi\Uploader\Aggille.Util.Zip.pas=E:\Aggille\Sistemas\Delphi\Uploader\Unit1.pas</Transaction>
+    <Transaction>2024/07/26 08:03:35.000.456,E:\Aggille\Sistemas\Delphi\Uploader\Aggille.Util.Zip.pas=</Transaction>
+  </Transactions>
+</BorlandProject>
