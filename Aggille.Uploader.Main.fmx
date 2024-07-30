@@ -2638,6 +2638,7 @@ object FrmMain: TFrmMain
         TextSettings.HorzAlign = Center
         Text = 'Start'
         TabOrder = 0
+        OnClick = lblBtnStartClick
       end
     end
     object RectExit: TRectangle

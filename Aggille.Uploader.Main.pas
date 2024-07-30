@@ -127,11 +127,11 @@ aExeName:String;
 begin
 
   try
+    aExeName := FIniFile.ReadString(SECTION_EXEFILE, 'File' , 'erp.exe' );
+    FExeVersion := VersaoExe( aExeName );
     Mensagem( 'Versão do Sistema: '+ FExeVersion );
     Mensagem( 'Compactação Iniciada' );
-    aExeName := FIniFile.ReadString(SECTION_EXEFILE, 'File' , 'erp.exe' );
     lblPb2.Text := 'Progresso total da compactação';
-    FExeVersion := VersaoExe( aExeName );
     rectStart.Enabled := False;
     rectExit.Enabled := false;
     FZipFile.FSpecArgs.Clear;
