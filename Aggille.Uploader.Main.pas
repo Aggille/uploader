@@ -31,6 +31,7 @@ type
     procedure Mensagem( aMensagem:String );
     procedure EnviaFtp();
     procedure RectExitClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     FIniFile:TIniFile;
@@ -40,6 +41,7 @@ type
     FExeVersion,
     FZipFileName:String;
     FZipFile:TZipMaster;
+    FAuto:Boolean;
     procedure LoadFiles;
     procedure LoadFolders;
     procedure LoadUploadFiles;
@@ -129,6 +131,8 @@ begin
   try
     aExeName := FIniFile.ReadString(SECTION_EXEFILE, 'File' , 'erp.exe' );
     FExeVersion := VersaoExe( aExeName );
+    if( FAuto ) then
+      Mensagem( '*** Modo Automático ***' );
     Mensagem( 'Versão do Sistema: '+ FExeVersion );
     Mensagem( 'Compactação Iniciada' );
     lblPb2.Text := 'Progresso total da compactação';
@@ -138,21 +142,32 @@ begin
     LoadFiles;
     LoadFolders;
     LoadUploadFiles;
-    AddFilesToZip();
-    AddFoldersToZip();
-    FZipFile.Add();
-    Mensagem( 'Compactação Concluída' );
-    pb1.Value := 0;
-    pb2.Value := 0;
-    lblPb2.Text := '';
-    Mensagem( 'Enviando para o FTP' );
-    pb1.Value := 0;
-    pb2.Value := 0;
-    lblPb1.Text := 'OK';
-    lblPb1.Text := 'OK';
+    try
+      AddFilesToZip();
+      AddFoldersToZip();
+      FZipFile.Add();
+      Mensagem( 'Compactação Concluída' );
+      pb1.Value := 0;
+      pb2.Value := 0;
+      lblPb2.Text := '';
+      Mensagem( 'Enviando para o FTP' );
+      pb1.Value := 0;
+      pb2.Value := 0;
+      lblPb1.Text := 'OK';
+      lblPb1.Text := 'OK';
+      EnviaFtp();
+      Mensagem( 'Envio Concluído' );
+      pb1.Value := 0;
+      pb2.Value := 0;
+      if( FAuto ) then RectExitClick(nil);
+    except
+      on e:Exception do
+        begin
+          FAuto := false;
+          Mensagem( '*** Erro : ' + e.Message );
+        end;
 
-    EnviaFtp();
-    Mensagem( 'Envio Concluído' );
+    end;
 
   finally
     rectStart.Enabled := true;
@@ -236,7 +251,12 @@ begin
 end;
 
 procedure TFrmMain.FormCreate(Sender: TObject);
+var
+aParam:String;
 begin
+
+  aParam := ParamStr(1).ToLower() ;
+  FAuto := ( ( aParam = 'auto' ) or ( aParam = '-auto' ) );
 
   edtMessage.Lines.Clear;
   lblMensagem.Text := '';
@@ -265,6 +285,11 @@ begin
   FZipFile.OnTick := ZipFileTick;
   FZipFile.AddOptions := [AddRecurseDirs,AddDirNames];
 
+end;
+
+procedure TFrmMain.FormShow(Sender: TObject);
+begin
+   if( FAuto ) then lblBtnStartClick(nil);
 end;
 
 procedure TFrmMain.FtpWork(ASender: TObject; AWorkMode: TWorkMode;
